@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bfoo6rsv88arl"]
+
+[ext_resource type="Script" uid="uid://g37ykm3m7epl" path="res://fighter.gd" id="1_efvb3"]
+
+[node name="fighter" type="VBoxContainer" unique_id=1081926402]
+scale = Vector2(0.6799996, 1)
+script = ExtResource("1_efvb3")
+fighter_name = "Альдерий"
+
+[node name="Label" type="Label" parent="." unique_id=612088262]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1781971118]
+custom_minimum_size = Vector2(270, 50)
+layout_mode = 2
+color = Color(0.60652083, 0.6746561, 0.5843945, 1)
