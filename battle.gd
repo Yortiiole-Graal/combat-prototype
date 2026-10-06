@@ -13,8 +13,8 @@ func change_state(new_state: State) -> void:
 			%AttackButton.disabled = false
 		State.ENEMY_TURN:
 			%Log.text += 'Ход врага' + '\n'
-			enemy_turn()
 			%AttackButton.disabled = true
+			enemy_turn()
 		State.WIN:
 			%Log.text += 'Победа' + '\n'
 			%AttackButton.disabled = true
@@ -35,7 +35,7 @@ func enemy_turn():
 	%Log.text += '\n'
 	if %Hero.hp <= 0:
 		change_state(State.LOSE)
-	elif %Hero.hp > 0:
+	else:
 		change_state(State.HERO_TURN)
 
 func _on_attack_button_pressed() -> void:
@@ -47,7 +47,7 @@ func _on_attack_button_pressed() -> void:
 	%Log.text += '\n'
 	if %Enemy.hp <= 0:
 		change_state(State.WIN)
-	elif %Enemy.hp > 0:
+	else:
 		change_state(State.ENEMY_TURN)
 
 func _on_restart_button_pressed() -> void:
