@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="combat-prototype"
-run/main_scene="uid://bfoo6rsv88arl"
+run/main_scene="uid://b366fmyp0e4q2"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

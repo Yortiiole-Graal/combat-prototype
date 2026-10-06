@@ -14,7 +14,6 @@ func take_damage(amount):
 	pass
 func _ready() -> void:
 	hp = max_hp
-	take_damage(220)
 	update_label()
 func update_label():
 	$Label.text = fighter_name + ':
