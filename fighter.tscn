@@ -3,9 +3,7 @@
 [ext_resource type="Script" uid="uid://g37ykm3m7epl" path="res://fighter.gd" id="1_efvb3"]
 
 [node name="fighter" type="VBoxContainer" unique_id=1081926402]
-scale = Vector2(0.6799996, 1)
 script = ExtResource("1_efvb3")
-fighter_name = "Альдерий"
 
 [node name="Label" type="Label" parent="." unique_id=612088262]
 layout_mode = 2
