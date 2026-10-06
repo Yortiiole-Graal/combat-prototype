@@ -20,27 +20,34 @@ grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=811731610]
 layout_mode = 2
+theme_override_constants/separation = 350
+alignment = 1
 
-[node name="hero" parent="VBoxContainer/HBoxContainer" unique_id=1081926402 instance=ExtResource("1_ip7xm")]
+[node name="Hero" parent="VBoxContainer/HBoxContainer" unique_id=1081926402 instance=ExtResource("1_ip7xm")]
+unique_name_in_owner = true
 layout_mode = 2
 fighter_name = "Alderiy"
 max_hp = 30
 
-[node name="enemy" parent="VBoxContainer/HBoxContainer" unique_id=1394584339 instance=ExtResource("1_ip7xm")]
+[node name="Enemy" parent="VBoxContainer/HBoxContainer" unique_id=1394584339 instance=ExtResource("1_ip7xm")]
+unique_name_in_owner = true
 layout_mode = 2
 fighter_name = "Night"
 max_hp = 40
 damage = 4
 
 [node name="AttackButton" type="Button" parent="VBoxContainer" unique_id=1650411268]
+unique_name_in_owner = true
 layout_mode = 2
 text = "ATTACK!"
 
 [node name="Log" type="Label" parent="VBoxContainer" unique_id=1319503732]
+unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 2
 
 [node name="RestartButton" type="Button" parent="VBoxContainer" unique_id=1304441666]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "RESTART"
