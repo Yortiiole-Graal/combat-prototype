@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b366fmyp0e4q2"]
+
+[ext_resource type="PackedScene" uid="uid://bfoo6rsv88arl" path="res://fighter.tscn" id="1_ip7xm"]
+
+[node name="Battle" type="Control" unique_id=1280246251]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2005678690]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=811731610]
+layout_mode = 2
+
+[node name="hero" parent="VBoxContainer/HBoxContainer" unique_id=1081926402 instance=ExtResource("1_ip7xm")]
+layout_mode = 2
+fighter_name = "Alderiy"
+max_hp = 30
+
+[node name="enemy" parent="VBoxContainer/HBoxContainer" unique_id=1394584339 instance=ExtResource("1_ip7xm")]
+layout_mode = 2
+fighter_name = "Night"
+max_hp = 40
+damage = 4
+
+[node name="AttackButton" type="Button" parent="VBoxContainer" unique_id=1650411268]
+layout_mode = 2
+text = "ATTACK!"
+
+[node name="Log" type="Label" parent="VBoxContainer" unique_id=1319503732]
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="VBoxContainer" unique_id=1304441666]
+visible = false
+layout_mode = 2
+text = "RESTART"
