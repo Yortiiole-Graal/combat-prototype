@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bfoo6rsv88arl" path="res://fighter.tscn" id="1_ip7xm"]
 [ext_resource type="Script" uid="uid://t4dur1nr8tvt" path="res://battle.gd" id="1_oxp8w"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wfwix"]
+bg_color = Color(0.4096732, 0.63329965, 0.6244723, 1)
+
 [node name="Battle" type="Control" unique_id=1280246251]
 layout_mode = 3
 anchors_preset = 15
@@ -30,7 +33,7 @@ unique_name_in_owner = true
 layout_mode = 2
 chance = 0.8
 fighter_name = "Alderiy"
-max_hp = 30
+max_hp = 10
 max_damage = 6
 
 [node name="Enemy" parent="VBoxContainer/HBoxContainer" unique_id=1394584339 instance=ExtResource("1_ip7xm")]
@@ -38,7 +41,33 @@ unique_name_in_owner = true
 layout_mode = 2
 chance = 0.5
 fighter_name = "Night"
-max_hp = 40
+max_hp = 30
+min_damage = 8
+max_damage = 10
+
+[node name="SoulBar" type="ProgressBar" parent="VBoxContainer" unique_id=724234230]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_wfwix")
+value = 100.0
+
+[node name="Label" type="Label" parent="VBoxContainer/SoulBar" unique_id=483603388]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -34.5
+offset_right = 188.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SOUL"
+horizontal_alignment = 1
 
 [node name="AttackButton" type="Button" parent="VBoxContainer" unique_id=1650411268]
 unique_name_in_owner = true

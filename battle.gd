@@ -1,10 +1,11 @@
 extends Control
 enum State {HERO_TURN, ENEMY_TURN, WIN, LOSE}
 var state: State = State.HERO_TURN
-var dmg: int = 0
 
 func _ready() -> void:
 	change_state(State.HERO_TURN)
+	update_soul_bar()
+	
 	
 func change_state(new_state: State) -> void:
 	state = new_state
@@ -39,10 +40,16 @@ func enemy_turn():
 		%Hero.take_damage(dmg1)
 		%Log.text += %Enemy.fighter_name + ' бьет ' + %Hero.fighter_name + ' на ' + str(dmg1) + ' урона.'
 		%Log.text += '\n'
-		if %Hero.hp <= 0:
-			change_state(State.LOSE)
-		else:
+		if %Hero.hp > 0:
 			change_state(State.HERO_TURN)
+		elif %Hero.hp <= 0 and GameState.soul >= GameState.revive_cost:
+			GameState.soul -= GameState.revive_cost
+			%Hero.revive()
+			update_soul_bar()
+			%Log.text = 'Удар был смертельным — душа ' + %Hero.fighter_name + ' удержала. Душа −' + str(GameState.revive_cost) + '\n'
+			change_state(State.HERO_TURN)
+		else:
+			change_state(State.LOSE)
 
 func _on_attack_button_pressed() -> void:
 	if state != State.HERO_TURN:
@@ -64,3 +71,7 @@ func _on_attack_button_pressed() -> void:
 
 func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
+	
+func update_soul_bar():
+	%SoulBar.max_value = GameState.max_soul
+	%SoulBar.value = GameState.soul

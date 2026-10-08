@@ -7,12 +7,15 @@ class_name Fighter
 @export var max_damage: int = 5
 var hp: int = max_hp
 signal died
-func take_damage(amount):
+func take_damage(amount: int) -> void:
 	hp -= amount
 	hp = clamp(hp, 0, max_hp)
 	update_label()
 	if hp <= 0:
 		died.emit()
+func revive():
+	hp = (max_hp / 3)
+	update_label()
 func _ready() -> void:
 	hp = max_hp
 	update_label()
