@@ -13,4 +13,4 @@ layout_mode = 2
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1781971118]
 custom_minimum_size = Vector2(137, 50)
 layout_mode = 2
-color = Color(0.60652083, 0.6746561, 0.5843945, 1)
+color = Color(0.2302525, 0.53473973, 0.7864434, 1)

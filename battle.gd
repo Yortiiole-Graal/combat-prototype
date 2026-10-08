@@ -43,7 +43,7 @@ func enemy_turn():
 		%Log.text += '\n'
 		if %Hero.hp > 0:
 			change_state(State.HERO_TURN)
-		if %Hero.hp <= 0 and GameState.soul >= GameState.revive_cost:
+		elif %Hero.hp <= 0 and GameState.soul >= GameState.revive_cost:
 			GameState.soul -= GameState.revive_cost
 			%Hero.revive()
 			update_soul_bar()
@@ -74,9 +74,10 @@ func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_new_game_button_pressed() -> void:
-	GameState.restartsoul()
+	GameState.resetsoul()
 	get_tree().reload_current_scene()
 
 func update_soul_bar():
 	%SoulBar.max_value = GameState.max_soul
 	%SoulBar.value = GameState.soul
+	%Hero.fade(float(((GameState.max_soul-GameState.soul)/GameState.max_soul)+0.0))
