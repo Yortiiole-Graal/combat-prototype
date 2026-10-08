@@ -78,7 +78,13 @@ text = "ATTACK!"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-text = "RESTART"
+text = "NEXT FIGHT"
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer" unique_id=2067395938]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "NEW GAME"
 
 [node name="Log" type="Label" parent="VBoxContainer" unique_id=1319503732]
 unique_name_in_owner = true
@@ -88,3 +94,4 @@ autowrap_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

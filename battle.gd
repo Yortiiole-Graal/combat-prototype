@@ -24,11 +24,12 @@ func change_state(new_state: State) -> void:
 			%RestartButton.disabled = false
 			%RestartButton.visible = true
 		State.LOSE:
-			%Log.text += 'Поражение' + '\n'
+			%Log.text += 'Душа иссякла. ' + %Hero.fighter_name + ' погиб окончательно' + '\n'
 			%AttackButton.disabled = true
 			%AttackButton.visible = false
-			%RestartButton.disabled = false
-			%RestartButton.visible = true
+			%NewGameButton.disabled = false
+			%NewGameButton.visible = true
+
 
 func enemy_turn():
 	await get_tree().create_timer(1.0).timeout
@@ -42,7 +43,7 @@ func enemy_turn():
 		%Log.text += '\n'
 		if %Hero.hp > 0:
 			change_state(State.HERO_TURN)
-		elif %Hero.hp <= 0 and GameState.soul >= GameState.revive_cost:
+		if %Hero.hp <= 0 and GameState.soul >= GameState.revive_cost:
 			GameState.soul -= GameState.revive_cost
 			%Hero.revive()
 			update_soul_bar()
@@ -71,7 +72,11 @@ func _on_attack_button_pressed() -> void:
 
 func _on_restart_button_pressed() -> void:
 	get_tree().reload_current_scene()
-	
+
+func _on_new_game_button_pressed() -> void:
+	GameState.restartsoul()
+	get_tree().reload_current_scene()
+
 func update_soul_bar():
 	%SoulBar.max_value = GameState.max_soul
 	%SoulBar.value = GameState.soul

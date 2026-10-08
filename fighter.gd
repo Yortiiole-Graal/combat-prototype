@@ -11,9 +11,10 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 	hp = clamp(hp, 0, max_hp)
 	update_label()
-	if hp <= 0:
+	if hp <= 0 and GameState.soul < GameState.revive_cost:
 		died.emit()
 func revive():
+	@warning_ignore("integer_division")
 	hp = (max_hp / 3)
 	update_label()
 func _ready() -> void:
