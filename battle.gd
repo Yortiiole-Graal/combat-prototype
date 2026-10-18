@@ -11,12 +11,12 @@ func change_state(new_state: State) -> void:
 	state = new_state
 	match state:
 		State.HERO_TURN:
+			if %Hero.tick_ampoule() == true:
+				%Log.text = 'Действие ампул кончилось' + '\n'
+				%Enemy.set_hp_hidden(%Hero.is_blind())
 			%Log.text += 'Ваш ход' + '\n'
 			%AttackButton.disabled = false
 			%AmpouleButton.disabled = %Hero.is_accurate() or %Hero.ampoules == 0
-			if %Hero.tick_ampoule() == true:
-				%Log.text += 'Действие ампул кончилось' + '\n'
-				%Enemy.set_hp_hidden(%Hero.is_blind())
 		State.ENEMY_TURN:
 			%Log.text += 'Ход врага' + '\n'
 			%AttackButton.disabled = true
