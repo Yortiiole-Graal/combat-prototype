@@ -16,7 +16,7 @@ func change_state(new_state: State) -> void:
 			%AmpouleButton.disabled = %Hero.is_accurate() or %Hero.ampoules == 0
 			if %Hero.tick_ampoule() == true:
 				%Log.text += 'Действие ампул кончилось' + '\n'
-			print(%Hero.chance if %Hero.is_accurate() == false else %Hero.chance_with_ampoule)
+				%Enemy.set_hp_hidden(%Hero.is_blind())
 		State.ENEMY_TURN:
 			%Log.text += 'Ход врага' + '\n'
 			%AttackButton.disabled = true
@@ -98,4 +98,5 @@ func _on_ampoule_button_pressed() -> void:
 		return
 	%Hero.use_ampoule()
 	%Log.text += %Hero.fighter_name + ' колет ампулу точности. Мир гаснет...' + '\n'
+	%Enemy.set_hp_hidden(%Hero.is_blind())
 	change_state(State.ENEMY_TURN)

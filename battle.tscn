@@ -37,6 +37,7 @@ max_hp = 30
 max_damage = 6
 ampoules = 1
 duration_ampoule = 3
+blind = true
 
 [node name="Enemy" parent="VBoxContainer/HBoxContainer" unique_id=1394584339 instance=ExtResource("1_ip7xm")]
 unique_name_in_owner = true

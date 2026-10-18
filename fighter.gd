@@ -7,10 +7,12 @@ class_name Fighter
 @export var max_damage: int = 5
 @export var ampoules: int = 0
 @export var duration_ampoule: int = 0
+@export var blind = false
 var chance_with_ampoule: float = 0.9
 var ampoule_turn: int = 0
 var hp: int = max_hp
 var base_color: Color
+var hp_hidden: bool = false
 signal died
 func take_damage(amount: int) -> void:
 	hp -= amount
@@ -29,11 +31,17 @@ func _ready() -> void:
 func fade(amount: float):
 	$ColorRect.color = base_color.lerp(Color(0.429, 0.503, 0.541, 1.0), amount)
 func update_label():
-	$Label.text = fighter_name + ':
-		Здоровье: ' + str(hp) + '/' + str(max_hp)
+	if hp_hidden: 
+		$Label.text = fighter_name + ':
+			Здоровье: ' + '???'
+	else:
+		$Label.text = fighter_name + ':
+			Здоровье: ' + str(hp) + '/' + str(max_hp)
 func is_accurate() -> bool:
 	return ampoule_turn > 0
 func is_blind() -> bool:
+	if blind:
+		return false
 	return ampoule_turn > 0
 func use_ampoule() -> void:
 	if ampoules <= 0:
@@ -44,5 +52,7 @@ func tick_ampoule() -> bool:
 	if ampoule_turn == 0:
 		return false
 	ampoule_turn -= 1
-	print (ampoule_turn)
 	return ampoule_turn == 0
+func set_hp_hidden(value: bool):
+	hp_hidden = value
+	update_label()
