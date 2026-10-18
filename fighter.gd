@@ -5,6 +5,10 @@ class_name Fighter
 @export var max_hp: int = 120
 @export var min_damage: int = 1
 @export var max_damage: int = 5
+@export var ampoules: int = 0
+@export var duration_ampoule: int = 0
+var chance_with_ampoule: float = 0.9
+var ampoule_turn: int = 0
 var hp: int = max_hp
 var base_color: Color
 signal died
@@ -27,3 +31,18 @@ func fade(amount: float):
 func update_label():
 	$Label.text = fighter_name + ':
 		Здоровье: ' + str(hp) + '/' + str(max_hp)
+func is_accurate() -> bool:
+	return ampoule_turn > 0
+func is_blind() -> bool:
+	return ampoule_turn > 0
+func use_ampoule() -> void:
+	if ampoules <= 0:
+		return
+	ampoules -= 1
+	ampoule_turn = duration_ampoule
+func tick_ampoule() -> bool:
+	if ampoule_turn == 0:
+		return false
+	ampoule_turn -= 1
+	print (ampoule_turn)
+	return ampoule_turn == 0

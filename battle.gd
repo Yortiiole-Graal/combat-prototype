@@ -13,9 +13,14 @@ func change_state(new_state: State) -> void:
 		State.HERO_TURN:
 			%Log.text += 'Ваш ход' + '\n'
 			%AttackButton.disabled = false
+			%AmpouleButton.disabled = %Hero.is_accurate() or %Hero.ampoules == 0
+			if %Hero.tick_ampoule() == true:
+				%Log.text += 'Действие ампул кончилось' + '\n'
+			print(%Hero.chance if %Hero.is_accurate() == false else %Hero.chance_with_ampoule)
 		State.ENEMY_TURN:
 			%Log.text += 'Ход врага' + '\n'
 			%AttackButton.disabled = true
+			%AmpouleButton.disabled = true
 			enemy_turn()
 		State.WIN:
 			%Log.text += 'Победа' + '\n'
@@ -23,12 +28,16 @@ func change_state(new_state: State) -> void:
 			%AttackButton.visible = false
 			%RestartButton.disabled = false
 			%RestartButton.visible = true
+			%AmpouleButton.disabled = true
+			%AmpouleButton.visible = false
 		State.LOSE:
 			%Log.text += 'Душа иссякла. ' + %Hero.fighter_name + ' погиб окончательно' + '\n'
 			%AttackButton.disabled = true
 			%AttackButton.visible = false
 			%NewGameButton.disabled = false
 			%NewGameButton.visible = true
+			%AmpouleButton.disabled = true
+			%AmpouleButton.visible = false
 
 
 func enemy_turn():
@@ -53,9 +62,10 @@ func enemy_turn():
 			change_state(State.LOSE)
 
 func _on_attack_button_pressed() -> void:
+	var chance: int = %Hero.chance
 	if state != State.HERO_TURN:
 		return
-	if %Hero.chance < randf():
+	if %Hero.chance if %Hero.is_accurate() == false else %Hero.chance_with_ampoule < randf():
 		%Log.text = ''
 		%Log.text += %Hero.fighter_name + ' Промахивается' + '\n'
 		change_state(State.ENEMY_TURN)
@@ -80,4 +90,12 @@ func _on_new_game_button_pressed() -> void:
 func update_soul_bar():
 	%SoulBar.max_value = GameState.max_soul
 	%SoulBar.value = GameState.soul
-	%Hero.fade(float(((GameState.max_soul-GameState.soul)/GameState.max_soul)+0.0))
+	%Hero.fade((float(GameState.max_soul-GameState.soul)/GameState.max_soul))
+
+
+func _on_ampoule_button_pressed() -> void:
+	if state != State.HERO_TURN:
+		return
+	%Hero.use_ampoule()
+	%Log.text += %Hero.fighter_name + ' колет ампулу точности. Мир гаснет...' + '\n'
+	change_state(State.ENEMY_TURN)
