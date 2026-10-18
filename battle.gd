@@ -62,10 +62,10 @@ func enemy_turn():
 			change_state(State.LOSE)
 
 func _on_attack_button_pressed() -> void:
-	var chance: int = %Hero.chance
+	var hit_chance: float = %Hero.chance if %Hero.is_accurate() == false else %Hero.chance_with_ampoule
 	if state != State.HERO_TURN:
 		return
-	if %Hero.chance if %Hero.is_accurate() == false else %Hero.chance_with_ampoule < randf():
+	if hit_chance < randf():
 		%Log.text = ''
 		%Log.text += %Hero.fighter_name + ' Промахивается' + '\n'
 		change_state(State.ENEMY_TURN)
